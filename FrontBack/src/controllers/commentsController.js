@@ -7,9 +7,9 @@ const userModel = require("../models/userModel.js");
 
 module.exports = class commentController {
   // Renders Pages ----------------------------------------
-  static async renderHome(req, res) {
-    res.render("comments/home");
-  }
+  // static async renderHome(req, res) {
+  //   res.render("comments/home");
+  // }
   // Renderiza página para criar comentário
   static async renderCreateComments(req, res) {
     res.render("comments/create");
@@ -135,23 +135,26 @@ module.exports = class commentController {
       console.log(error);
     }
   }
+
+  static async renderHome(req, res) {
+    const listUsers = await userModel.getAllUsers();
+    const listComments = [];
+    // {
+    //  userName: name
+    //  title: 'comment'
+    // }
+
+    // Percorre a lista procurando pelo objeto com idComment do editado
+    console.log("==================================================");
+    for (const user of listUsers) {
+      for (const comment of user.comments) {
+        listComments.push({userName: user.name, comment: comment.title});
+      }
+    }
+
+    res.render("comments/home", {listComments});
+  }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // static showToughts(req, res) {
 //   console.log(req.query)
