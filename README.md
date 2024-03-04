@@ -1,14 +1,12 @@
 # ProjetoCommentsJS
-Projeto de estudo: Comments
+### Projeto de estudo: Comments
 O projeto foi criado seguindo o curso da udemy: Node.js do Zero a Maestria com diversos Projetos.
 O nome do projeto no curso é 'Toughts'.
 
-O que faz:
-O sistema cadastra usuários e seus comentários, além de listar comentários.
+### O que faz:
+O sistema tem como intuito cadastra usuários e seus comentários, além de listar comentários.
 
-PROJETO EM DESENVOLVIMENTO
-
-O que foi/está sendo utilizado aqui:
+### O que foi/está sendo utilizado aqui:
 - Node.js;
 - Html e CSS;
 - MongoDB;
@@ -19,3 +17,11 @@ O que foi/está sendo utilizado aqui:
   - cookie-session + file-store - para salvar sessao de user;
   - has-keys - verificar a existencia de campos;
   - nodemon - executar backend.
+
+### Projeto base concluido e funcionando.
+
+## Funções:
+- Cadastro de usuário;
+- Cadastro, edição e remoção de comentário;
+- Listagem de comentários próprios
+- Listagem de comentários cadastrados no sistema + filtros;
