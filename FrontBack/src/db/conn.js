@@ -4,19 +4,6 @@ const uri = "mongodb://localhost:27017/Projeto_Comments";
 
 const conn = new MongoClient(uri);
 
-// async function run() {
-//   try {
-//     await conn.connect();
-//     console.log("Conectado ao MongoDB...");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// run();
-
-// module.exports = conn;
-
 module.exports = {
   async getConnectionDB() {
     if (!global.dbIsConnnected) {
@@ -24,14 +11,12 @@ module.exports = {
         await conn.connect();
         console.log("Conectado ao MongoDB...");
 
-        global.dbIsConnnected = true
-      } 
-      catch (error) {
+        global.dbIsConnnected = true;
+      } catch (error) {
         console.log(error);
       }
       return conn.db();
-    }
-    else {
+    } else {
       return conn.db();
     }
     // Tratando autorização do mongodb

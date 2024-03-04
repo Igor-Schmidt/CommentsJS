@@ -64,7 +64,11 @@ module.exports = class commentController {
       }
     });
 
-    const comment = { title: req.body.title, idComment: maiorIdComment + 1, createAt: new Date()};
+    const comment = {
+      title: req.body.title,
+      idComment: maiorIdComment + 1,
+      createAt: new Date(),
+    };
 
     listNewComment.push(comment);
 
@@ -118,7 +122,7 @@ module.exports = class commentController {
       if (objeto.idComment == idComment) {
         // Atualiza o campo 'title' do objeto comment e 'createAt'
         objeto.title = title;
-        objeto.createAt = new Date()
+        objeto.createAt = new Date();
         break;
       }
     }
@@ -156,45 +160,48 @@ module.exports = class commentController {
     for (const user of listUsers) {
       // Percorre comments de user da vez
       for (const comment of user.comments) {
-        const createDate = (new Date(comment.createAt).toISOString().replace(/T/, ' ').replace(/\..+/, '')).split(' ')[0]
-        const formatDate = (`${createDate.split('-')[2]}-${createDate.split('-')[1]}-${createDate.split('-')[0]}`);
-        listComments.push({userName: user.name, comment: comment.title, createAt: comment.createAt, formatDate: formatDate});
+        
+        const createDate = new Date(comment.createAt).toISOString().replace(/T/, " ").replace(/\..+/, "").split(" ")[0];
+        const formatDate = `${createDate.split("-")[2]}-${createDate.split("-")[1]}-${createDate.split("-")[0]}`;
+
+        listComments.push({userName: user.name,comment: comment.title,createAt: comment.createAt,formatDate: formatDate,});
       }
     }
 
     // FILTRANDO POR ORDEM ==========================================================
-    let order = 'newToOld'
-    let listCommentsOrder = []
+    let order = "newToOld";
+    let listCommentsOrder = [];
 
     if (req.query.order) {
-      order = req.query.order
+      order = req.query.order;
     }
-    
+
     // Filtro Mais novo ao mais antigo
-    if (order == 'newToOld') {
+    if (order == "newToOld") {
       listCommentsOrder = listComments.sort((a, b) => b.createAt - a.createAt);
     }
     // Filtro Mais antigo ao mais novo
-    else if (order == 'oldToNew') {
+    else if (order == "oldToNew") {
       listCommentsOrder = listComments.sort((a, b) => a.createAt - b.createAt);
     }
     // ==============================================================================
-    
 
     // FILTRANDO POR SEARCH =========================================================
-    let search = ''
-    let commentsQtd = null
-    
-    if (req.query.search) {
-      search = req.query.search
+    let search = "";
+    let commentsQtd = null;
 
-      listCommentsOrder = listCommentsOrder.filter(comment => comment.comment.includes(search))
+    if (req.query.search) {
+      search = req.query.search;
+
+      listCommentsOrder = listCommentsOrder.filter((comment) =>
+        comment.comment.includes(search)
+      );
 
       if (listCommentsOrder.length > 0) {
-        commentsQtd = listCommentsOrder.length
+        commentsQtd = listCommentsOrder.length;
       }
     }
-    // ==============================================================================    
-    res.render("comments/home", {listCommentsOrder, commentsQtd, search});
+    // ==============================================================================
+    res.render("comments/home", { listCommentsOrder, commentsQtd, search });
   }
 };

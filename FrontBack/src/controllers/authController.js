@@ -119,8 +119,6 @@ module.exports = class authController {
         req.session.save(() => {
           res.redirect("/");
         });
-
-        
       } catch (error) {
         console.log(error);
       }
