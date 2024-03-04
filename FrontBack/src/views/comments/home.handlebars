@@ -1,10 +1,10 @@
-{{!-- <div class="home-header">
+<div class="home-header">
   
   {{#if search}}
     <h1>Você está buscando por: <span>{{search}}</span></h1>
 
-    {{#if commentsQty}}
-      <p>Foram encontrados <span>{{commentsQty}}</span> comentários(s)</p>
+    {{#if commentsQtd}}
+      <p>Foram encontrados <span>{{commentsQtd}}</span> comentários(s).</p>
     {{else}}
       <p>Nenhum comentário encontrado para o termo <span>{{search}}</span></p>
     {{/if}}
@@ -15,8 +15,8 @@
   {{/if}}
 
   <form action="/" method="GET">
-    <input type="text" name="search" placeholder="Está buscando por algo?" />
-    <input type="submit" class="btn" value="Buscar" />
+    <input type="text" name="search" minlength="3" placeholder="Está buscando por algo?" />
+    <input type="submit" class="btn" value="Buscar" style="padding: 0.5em;"/>
   </form>
   
   <div class="order-container">
@@ -24,29 +24,29 @@
     
     <form action="/" method="GET">
       <input type="hidden" name="search" value="{{this.search}}" />
-      <input type="hidden" name="order" value="new" />
+      <input type="hidden" name="order" value="newToOld" />
       <button type="submit"><i class="bi bi-arrow-up"></i> Mais novos</button>
     </form>
     
     <form action="/" method="GET">
       <input type="hidden" name="search" value="{{this.search}}" />
-      <input type="hidden" name="order" value="old" />
-      <button type="submit"><i class="bi bi-arrow-down"></i>
-        Mais antigos</button>
+      <input type="hidden" name="order" value="oldToNew" />
+      <button type="submit"><i class="bi bi-arrow-down"></i> Mais antigos</button>
     </form>
     
     <a href="/">Limpar</a>
     
   </div>
-</div> --}}
+</div>
 
 <div class="comments-container">
   
-  {{#each listComments}}
+  {{#each listCommentsOrder}}
     
     <figure>
       <blockquote>"{{this.comment}}"</blockquote>
       <figcaption>por <span>{{this.userName}}</span></figcaption>
+      <figcaption>em: <span>{{this.formatDate}}</span></figcaption>
     </figure>
     
   {{/each}}

@@ -64,7 +64,7 @@ module.exports = class commentController {
       }
     });
 
-    const comment = { title: req.body.title, idComment: maiorIdComment + 1 };
+    const comment = { title: req.body.title, idComment: maiorIdComment + 1, createAt: new Date()};
 
     listNewComment.push(comment);
 
@@ -116,8 +116,9 @@ module.exports = class commentController {
     // Percorre a lista procurando pelo objeto com idComment do editado
     for (const objeto of listComments) {
       if (objeto.idComment == idComment) {
-        // Atualiza o campo 'title' do objeto comment
+        // Atualiza o campo 'title' do objeto comment e 'createAt'
         objeto.title = title;
+        objeto.createAt = new Date()
         break;
       }
     }
@@ -137,61 +138,63 @@ module.exports = class commentController {
   }
 
   static async renderHome(req, res) {
-    const listUsers = await userModel.getAllUsers();
-    const listComments = [];
+    // Lista users cadastrados no db
+    // Apartir disso extrai os comentarios que cada user fez
+    // Adiciona a uma lista de objetos o nome do user e o comentario que ele criou
+    // Essa lista é mandada junto do render que posteriormente é utilizada no corpo da pag.
+    // listComments
+
     // {
     //  userName: name
     //  title: 'comment'
     // }
 
-    // Percorre a lista procurando pelo objeto com idComment do editado
-    console.log("==================================================");
+    const listUsers = await userModel.getAllUsers();
+    let listComments = [];
+
+    // Gera lista com comments e user name
     for (const user of listUsers) {
+      // Percorre comments de user da vez
       for (const comment of user.comments) {
-        listComments.push({userName: user.name, comment: comment.title});
+        const createDate = (new Date(comment.createAt).toISOString().replace(/T/, ' ').replace(/\..+/, '')).split(' ')[0]
+        const formatDate = (`${createDate.split('-')[2]}-${createDate.split('-')[1]}-${createDate.split('-')[0]}`);
+        listComments.push({userName: user.name, comment: comment.title, createAt: comment.createAt, formatDate: formatDate});
       }
     }
 
-    res.render("comments/home", {listComments});
+    // FILTRANDO POR ORDEM ==========================================================
+    let order = 'newToOld'
+    let listCommentsOrder = []
+
+    if (req.query.order) {
+      order = req.query.order
+    }
+    
+    // Filtro Mais novo ao mais antigo
+    if (order == 'newToOld') {
+      listCommentsOrder = listComments.sort((a, b) => b.createAt - a.createAt);
+    }
+    // Filtro Mais antigo ao mais novo
+    else if (order == 'oldToNew') {
+      listCommentsOrder = listComments.sort((a, b) => a.createAt - b.createAt);
+    }
+    // ==============================================================================
+    
+
+    // FILTRANDO POR SEARCH =========================================================
+    let search = ''
+    let commentsQtd = null
+    
+    if (req.query.search) {
+      search = req.query.search
+
+      listCommentsOrder = listCommentsOrder.filter(comment => comment.comment.includes(search))
+
+      if (listCommentsOrder.length > 0) {
+        commentsQtd = listCommentsOrder.length
+      }
+    }
+    // ==============================================================================    
+    res.render("comments/home", {listCommentsOrder, commentsQtd, search});
   }
 };
-
-// static showToughts(req, res) {
-//   console.log(req.query)
-
-//   // check if user is searching
-//   let search = ''
-
-//   if (req.query.search) {
-//     search = req.query.search
-//   }
-
-//   // order results, newest first
-//   let order = 'DESC'
-
-//   if (req.query.order === 'old') {
-//     order = 'ASC'
-//   } else {
-//     order = 'DESC'
-//   }
-
-//   Tought.findAll({
-//     include: User,
-//     where: {
-//       title: { [Op.like]: `%${search}%` },
-//     },
-//     order: [['createdAt', order]],
-//   })
-//     .then((data) => {
-//       let toughtsQty = data.length
-
-//       if (toughtsQty === 0) {
-//         toughtsQty = false
-//       }
-
-//       const toughts = data.map((result) => result.get({ plain: true }))
-
-//       res.render('toughts/home', { toughts, toughtsQty, search })
-//     })
-//     .catch((err) => console.log(err))
-// }

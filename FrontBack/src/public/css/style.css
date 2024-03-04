@@ -190,6 +190,7 @@
     max-width: 60%;
     margin: 0 auto;
     text-align: center;
+    padding-bottom: 3%;
   }
   
   .home-header h1 {
@@ -270,7 +271,7 @@
   
   .comments-container blockquote {
     font-style: italic;
-    font-size: 2em;
+    font-size: 1.5em;
     margin-bottom: 0.4em;
   }
   
