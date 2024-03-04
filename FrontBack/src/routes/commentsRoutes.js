@@ -15,7 +15,7 @@ routerComments.get("/edit/:idComment", checkAuth, commentController.renderEditCo
 // Actions ---------------------------------------------------------
 routerComments.post("/create", checkAuth, commentController.createComment);
 routerComments.post("/remove", checkAuth, commentController.removeComment);
-routerComments.post("/edit/:idComment", checkAuth, commentController.editComment);
+routerComments.post("/edit", checkAuth, commentController.editComment);
 // -----------------------------------------------------------------
 
 module.exports = routerComments;

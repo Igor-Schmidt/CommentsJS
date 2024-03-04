@@ -104,7 +104,7 @@ module.exports = class authController {
         name,
         email,
         password: hashedPassword,
-        comments:[],
+        comments: [],
       };
       try {
         await userModel.createNewUser(user);
@@ -119,6 +119,8 @@ module.exports = class authController {
         req.session.save(() => {
           res.redirect("/");
         });
+
+        
       } catch (error) {
         console.log(error);
       }
