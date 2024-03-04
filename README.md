@@ -22,6 +22,9 @@ O sistema tem como intuito cadastra usuários e seus comentários, além de list
 
 ## Funções:
 - Cadastro de usuário;
+- Checa se usuário com email informado já existe;
+- Verifica confirmação de senha;
+- Login funcional, verifica existencia e valida pwd;
 - Cadastro, edição e remoção de comentário;
 - Listagem de comentários próprios
 - Listagem de comentários cadastrados no sistema + filtros;
