@@ -4,7 +4,7 @@ O projeto foi criado seguindo o curso da udemy: Node.js do Zero a Maestria com d
 O nome do projeto no curso é 'Toughts'.
 
 O que faz:
-O sistema cadastra usuários e seus comentários, além de listar comentários e a possibilidade de filtralos
+O sistema cadastra usuários e seus comentários, além de listar comentários.
 
 PROJETO EM DESENVOLVIMENTO
 
