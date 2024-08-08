@@ -1,0 +1,22 @@
+{
+    "conexao": {
+        "backend": "http://localhost:"
+    },
+    
+    "portas": {
+        "backend": "5001",
+        "frontend": "5002"
+    },
+
+    "db_mongo": {
+        "url": "mongodb://127.0.0.1:27017/",
+        "db": "dbProva",
+        "userMongo": "user Mongo",
+        "passMongo": "pass Mongo",
+
+        "options": {
+            "useNewUrlParser": true,
+            "useUnifiedTopology": true
+        }
+    }
+}

@@ -1,0 +1,24 @@
+<div class="comments">
+  <div class="title-container">
+    <h2>My Comments</h2>
+    <a href="/pages/create" class="btn">Criar Comentário</a>
+  </div>
+  {{! <h3>Seus comentários:</h3> }}
+  <ul>
+    {{#each listComments}}
+      <li>
+        <span class="label">{{this.title}}</span>
+        <span class="actions">
+          <a href="/pages/edit/{{this.idComment}}" class="btn">Editar</a>
+          <form action="/comments/remove" method="POST">
+            <input type="hidden" name="id" value="{{this.idComment}}" />
+            <input type="submit" value="Excluir" class="btn" />
+          </form>
+        </span>
+      </li>
+    {{/each}}
+  </ul>
+  {{#if emptyComments}}
+    <h4>Você ainda não criou nenhum comentário!</h4>
+  {{/if}}
+</div>

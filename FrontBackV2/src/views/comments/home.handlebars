@@ -1,0 +1,60 @@
+<div class="home-header">
+
+  {{#if search}}
+    <h1>Você está buscando por: <span>{{search}}</span></h1>
+
+    {{#if commentsQtd}}
+      <p>Foram encontrados <span>{{commentsQtd}}</span> comentários(s).</p>
+    {{else}}
+      <p>Nenhum comentário encontrado para o termo <span>{{search}}</span></p>
+    {{/if}}
+
+  {{else}}
+    <h1>Conheça alguns dos nossos <span>Comentários</span>:</h1>
+
+  {{/if}}
+
+  <form action="/" method="GET">
+    <input
+      type="text"
+      name="search"
+      minlength="3"
+      placeholder="Está buscando por algo?"
+    />
+    <input type="submit" class="btn" value="Buscar" style="padding: 0.5em;" />
+  </form>
+
+  <div class="order-container">
+    <span>Ordenar por:</span>
+
+    <form action="/" method="GET">
+      <input type="hidden" name="search" value="{{this.search}}" />
+      <input type="hidden" name="order" value="newToOld" />
+      <button type="submit"><i class="bi bi-arrow-up"></i> Mais novos</button>
+    </form>
+
+    <form action="/" method="GET">
+      <input type="hidden" name="search" value="{{this.search}}" />
+      <input type="hidden" name="order" value="oldToNew" />
+      <button type="submit"><i class="bi bi-arrow-down"></i>
+        Mais antigos</button>
+    </form>
+
+    <a href="/">Limpar</a>
+
+  </div>
+</div>
+
+<div class="comments-container">
+
+  {{#each listCommentsOrder}}
+
+    <figure>
+      <blockquote>"{{this.comment}}"</blockquote>
+      <figcaption>por <span>{{this.userName}}</span></figcaption>
+      <figcaption>em: <span>{{this.formatDate}}</span></figcaption>
+    </figure>
+
+  {{/each}}
+
+</div>
