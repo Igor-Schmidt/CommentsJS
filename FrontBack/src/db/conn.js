@@ -1,6 +1,6 @@
 const { MongoClient } = require("mongodb");
 
-const uri = "mongodb://localhost:27017/Projeto_Comments";
+const uri = "mongodb://localhost:27017/dbProvaComments";
 
 const conn = new MongoClient(uri);
 

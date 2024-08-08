@@ -76,7 +76,7 @@ app.use("/", require("./routes/main.js"));
 try {
   app.listen(
     config.portas.frontend,
-    () => console.info('\nFrontend Rodando em:', config.portas.frontend)
+    () => console.info('\nProjeto Rodando em:', config.portas.frontend)
   );
 } catch (error) {
   console.log('[ERRO] - Erro ao inicializar o Frontend: \n', error);
