@@ -43,7 +43,7 @@ app.use(express.json());
 app.use(
   session({
     name: "session",
-    secret: "nosso_secret",
+    secret: "secret",
     resave: false,
     saveUninitialized: false,
 
