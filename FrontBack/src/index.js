@@ -86,8 +86,8 @@ app.use("/", require("./routes/routerMain.js"));
 
 try {
   conn.getConnectionDB();
-  app.listen(3000);
-  console.log("Rodando na porta:", 3000);
+  app.listen(5001);
+  console.log("Rodando na porta:", 5001);
 } catch (error) {
   console.log(error);
 }

@@ -5,7 +5,7 @@ const routerAuth = express.Router();
 const authController = require("../controllers/authController.js");
 
 // -----------------------------------------------------------------
-// localhost:3000/auth/
+// localhost:5001/auth/
 
 // Renders Pages ---------------------------------------------------
 routerAuth.get("/login", authController.renderLogin);
